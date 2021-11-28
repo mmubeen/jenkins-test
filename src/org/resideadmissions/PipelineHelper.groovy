@@ -21,8 +21,11 @@ package org.resideadmissions
 
 class PipelineHelper implements Serializable{
     def steps
+    def aws = new AwsHelper()
+
     PipelineHelper(steps) {
         this.steps = steps
+        this.aws = new AwsHelper()
     }
 
     def getImageTags(awsCredentialsId, region){
@@ -36,8 +39,8 @@ class PipelineHelper implements Serializable{
                 // def dropdownlist = []
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
-                aws = new AwsHelper()
-                ecrLogin = aws.ecrGetLogin()
+                
+                ecrLogin = this.aws.ecrGetLogin()
                 return ecrLogin
 
         } catch (error){
