@@ -6,7 +6,7 @@ import groovy.json.JsonSlurperClassic
 class AwsHelper implements Serializable{
 
     AwsHelper(){
-        echo "AwsHelper class creared"
+        println "AwsHelper class created"
     }
 
 
