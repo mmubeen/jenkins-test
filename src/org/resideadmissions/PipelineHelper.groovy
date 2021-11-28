@@ -2,10 +2,6 @@ package org.resideadmissions
 
 @Library('jenkins-pipeline-aws-shared-lib') import org.resideadmissions.AwsHelper
 
-
-
-
-def aws = new AwsHelper()
 // class Utilities implements Serializable {
 //     def steps
 //     Utilities(steps) {
@@ -41,6 +37,7 @@ class PipelineHelper implements Serializable{
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
                 stage('Get or create ECS cluster'){
+                    aws = new AwsHelper()
                     ecrLogin = aws.awsECRGetLogin()
                     return ecrLogin
                 }
