@@ -7,8 +7,11 @@ pipeline {
     stages {
         stage("Hello World") {
             steps {
-                aws_helper = new AWShelper(this)
-                echo aws_helper.getImageTags
+                script {
+                    aws_helper = new AWShelper(this)
+                    echo aws_helper.getImageTags
+                }
+                
             }
         }
     }
