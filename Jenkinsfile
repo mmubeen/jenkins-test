@@ -1,3 +1,5 @@
+@Library('reside-pipeline-shared')
+
 pipeline {
     agent {
         node {
