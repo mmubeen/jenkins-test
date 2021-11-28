@@ -1,4 +1,4 @@
-@Library('reside-pipeline-shared') _
+@Library('reside-pipeline-shared@main') _
 
 pipeline {
     agent  any
