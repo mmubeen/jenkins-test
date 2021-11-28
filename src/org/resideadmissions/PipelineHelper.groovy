@@ -1,4 +1,9 @@
+@Library('jenkins-pipeline-aws-shared-lib') import com.jenkins.aws.AWShelper
 package org.resideadmissions
+
+
+
+def aws = new Pipeline()
 // class Utilities implements Serializable {
 //     def steps
 //     Utilities(steps) {
@@ -16,7 +21,7 @@ package org.resideadmissions
 //     }
 // }
 
-class AWShelper implements Serializable{
+class PipelineHelper implements Serializable{
     def steps
     AWShelper(steps) {
         this.steps = steps
@@ -24,15 +29,19 @@ class AWShelper implements Serializable{
 
     def getImageTags(awsCredentialsId, region){
         try {
-            this.steps.withCredentials([this.steps.usernameColonPassword(credentialsId: awsCredentialsId, variable: 'awsCreds')]) {
-                this.steps.sh(returnStdout: false, script: "aws ecr get-login --region ${region} --no-include-email")
-                this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name reside-integrations --region ${region} 2>&1 | tee result.json")
-                def tagsList = readFile('result.json').trim()
-                echo "tagsList: ${tagsList}"
-                def parsedJSON = new groovy.json.JsonSlurperClassic().parseText(tagsList) //imageTag
-                def dropdownlist = []
-                parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
-                return dropdownlist
+            this.steps.withAWS(credentials: awsCredentialsId, region: region) {
+                // this.steps.sh(returnStdout: false, script: "aws ecr get-login --region ${region} --no-include-email")
+                // this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name reside-integrations --region ${region} 2>&1 | tee result.json")
+                // def tagsList = readFile('result.json').trim()
+                // echo "tagsList: ${tagsList}"
+                // def parsedJSON = new groovy.json.JsonSlurperClassic().parseText(tagsList) //imageTag
+                // def dropdownlist = []
+                // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
+                // return dropdownlist
+                stage('Get or create ECS cluster'){
+                    ecrLogin = aws.awsECRGetLogin()
+                    return ecrLogin
+                }
             }
         } catch (error){
             this.steps.echo error.getMessage()
