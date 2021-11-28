@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Hello World") {
             steps {
-                def aws_helper = new org.resideadmissions.awshelper.AWShelper(this)
+                def aws_helper = new org.resideadmissions.AWShelper(this)
                 echo aws_helper.getImageTags
             }
         }
