@@ -27,7 +27,7 @@ class PipelineHelper implements Serializable{
 
     def getImageTags(awsCredentialsId, region){
         try {
-            this.steps.withAWS(credentials: awsCredentialsId, region: region) {
+
                 // this.steps.sh(returnStdout: false, script: "aws ecr get-login --region ${region} --no-include-email")
                 // this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name reside-integrations --region ${region} 2>&1 | tee result.json")
                 // def tagsList = readFile('result.json').trim()
@@ -36,12 +36,11 @@ class PipelineHelper implements Serializable{
                 // def dropdownlist = []
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
-                stage('Get or create ECS cluster'){
+                stage('Get ECR Login'){
                     aws = new AwsHelper()
                     ecrLogin = aws.awsECRGetLogin()
                     return ecrLogin
                 }
-            }
         } catch (error){
             this.steps.echo error.getMessage()
             throw error
