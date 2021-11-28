@@ -5,6 +5,6 @@ import org.resideadmissions.AWShelper
 node {    
      
     aws_helper = new AWShelper(this)
-    echo aws_helper.getImageTags("somecreds","region")
+    echo aws_helper.getImageTags("aws-reside-dev-credentials","us-east-2")
                
 }
