@@ -1,4 +1,4 @@
-@Library('reside-pipeline-shared@main') _
+@Library('reside-pipeline-shared@main') import('org.resideadmissions.AWShelper') _
 
 
 pipeline {
@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Hello World") {
             steps {
-                def aws_helper = new org.resideadmissions.AWShelper(this)
+                def aws_helper = new AWShelper(this)
                 echo aws_helper.getImageTags
             }
         }

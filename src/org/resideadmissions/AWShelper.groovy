@@ -16,7 +16,7 @@ package org.resideadmissions
 //     }
 // }
 
-class AWShelper {
+class AWShelper implements Serializable{
     def steps
     AWShelper(steps) {
         this.steps = steps
