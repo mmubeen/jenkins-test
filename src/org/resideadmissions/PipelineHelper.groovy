@@ -37,7 +37,7 @@ class PipelineHelper implements Serializable{
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
 
-                ecrLogin = AwsHelper.awsECRGetLogin()
+                ecrLogin = AwsHelper.ecrGetLogin()
                 return ecrLogin
 
         } catch (error){
