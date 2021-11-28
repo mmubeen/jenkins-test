@@ -1,6 +1,6 @@
 package org.resideadmissions
 
-@Library('jenkins-pipeline-aws-shared-lib') import org.resideadmissions.AwsHelper
+// @Library('jenkins-pipeline-aws-shared-lib') import org.resideadmissions.AwsHelper
 
 // class Utilities implements Serializable {
 //     def steps
