@@ -6,13 +6,9 @@ pipeline {
     agent  any
     stages {
         stage("Hello World") {
-            steps {
-                script {
-                    aws_helper = new AWShelper(this)
-                    echo aws_helper.getImageTags
-                }
-                
-            }
+            aws_helper = new AWShelper(this)
+            echo aws_helper.getImageTags
+
         }
     }
 }
