@@ -1,3 +1,9 @@
+@Library('reside-pipeline-shared')
+
+def testChoices(){
+ return[1,2,3]    
+}
+
 def loginToAWSEcrService(region) {
     withEnv(["REGION=$region"]) {
         stage("Login To AWS Ecr Service") {
