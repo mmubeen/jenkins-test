@@ -3,8 +3,8 @@ import org.resideadmissions.PipelineHelper
 
 
 node {    
-    withAWS("aws-reside-dev-credentials","us-east-2"){
-        aws_helper = new PipelineHelper(this)
-        echo aws_helper.getImageTags("aws-reside-dev-credentials","us-east-2")
+    withAWS(credentials:"aws-reside-dev-credentials",region:"us-east-2"){
+        pipeine_helper = new PipelineHelper(this)
+        echo pipeine_helper.getImageTags("aws-reside-dev-credentials","us-east-2")
     }        
 }
