@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage("Hello World") {
             steps {
-                def aws_helper = new AWShelper(this)
+                aws_helper = new AWShelper(this)
                 echo aws_helper.getImageTags
             }
         }
