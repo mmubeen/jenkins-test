@@ -1,11 +1,7 @@
 @Library('reside-pipeline-shared')
 
 pipeline {
-    agent {
-        node {
-            label ""
-        }
-    }
+    agent  any
     stages {
         stage("Hello World") {
             steps {
