@@ -25,7 +25,7 @@ def aws = new AwsHelper()
 
 class PipelineHelper implements Serializable{
     def steps
-    AWShelper(steps) {
+    PipelineHelper(steps) {
         this.steps = steps
     }
 
