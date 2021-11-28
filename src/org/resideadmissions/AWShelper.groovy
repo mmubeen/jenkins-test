@@ -40,42 +40,42 @@ class AWShelper implements Serializable{
         }
     }
 
-    def loginToAWSEcrService(region) {
-        awsloginstring = `aws ecr get-login --region ${region} --no-include-email`
-        this.steps.sh '''
-            eval `aws ecr get-login --region ${region} --no-include-email`
-        '''
-    }
+    // def loginToAWSEcrService(region) {
+    //     awsloginstring = `aws ecr get-login --region ${region} --no-include-email`
+    //     this.steps.sh '''
+    //         eval `aws ecr get-login --region ${region} --no-include-email`
+    //     '''
+    // }
 
-    def getCredentialsId(env) {
-        switch(env) {
-            case 'dev':
-            return "aws-reside-dev-credentials"
+    // def getCredentialsId(env) {
+    //     switch(env) {
+    //         case 'dev':
+    //         return "aws-reside-dev-credentials"
 
-            case 'test':
-            return "aws-reside-test-credentials"
+    //         case 'test':
+    //         return "aws-reside-test-credentials"
 
-            case 'stg':
-            return "aws-reside-stg-credentials"
+    //         case 'stg':
+    //         return "aws-reside-stg-credentials"
 
-            default:
-            return "aws-reside-credentials"
-        }
-    }
+    //         default:
+    //         return "aws-reside-credentials"
+    //     }
+    // }
 
-    def getAwsAccount(env) {
-        switch(env) {
-            case 'dev':
-            return "380505780076.dkr.ecr.us-east-2.amazonaws.com"
+    // def getAwsAccount(env) {
+    //     switch(env) {
+    //         case 'dev':
+    //         return "380505780076.dkr.ecr.us-east-2.amazonaws.com"
 
-            case 'test':
-            return "462285824561.dkr.ecr.us-east-2.amazonaws.com"
+    //         case 'test':
+    //         return "462285824561.dkr.ecr.us-east-2.amazonaws.com"
 
-            case 'stg':
-            return "578511621719.dkr.ecr.us-east-2.amazonaws.com"
+    //         case 'stg':
+    //         return "578511621719.dkr.ecr.us-east-2.amazonaws.com"
 
-            default:
-            return "402516319689.dkr.ecr.us-east-2.amazonaws.com"
-        }
-    }
+    //         default:
+    //         return "402516319689.dkr.ecr.us-east-2.amazonaws.com"
+    //     }
+    // }
 }
