@@ -4,6 +4,12 @@ import com.cloudbees.groovy.cps.NonCPS
 import groovy.json.JsonSlurperClassic
 
 class AwsHelper implements Serializable{
+
+    AwsHelper(){
+        echo "AwsHelper class creared"
+    }
+
+
     @NonCPS
     def jsonParse(def json) {
         new JsonSlurperClassic().parseText(json)
