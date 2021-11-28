@@ -24,8 +24,8 @@ class AWShelper implements Serializable{
 
     def getImageTags(awsCredentialsId, region){
         try {
-            this.steps.withCredentials([this.steps.usernameColonPassword(credentialsId: credentials, variable: awsCredentialsId)]) {
-            
+            this.steps.withCredentials([this.steps.usernameColonPassword(credentialsId: awsCredentialsId, variable: 'awsCreds')]) {
+                this.steps.sh(returnStdout: false, script: "aws ecr get-login --region ${region} --no-include-email")
                 this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name reside-integrations --region ${region} 2>&1 | tee result.json")
                 def tagsList = readFile('result.json').trim()
                 echo "tagsList: ${tagsList}"
