@@ -1,5 +1,5 @@
 @Library('reside-pipeline-shared@main')
-import('org.resideadmissions.AWShelper')
+import org.resideadmissions.AWShelper
 
 
 pipeline {
