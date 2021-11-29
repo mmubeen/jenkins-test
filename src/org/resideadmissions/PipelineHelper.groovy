@@ -22,6 +22,7 @@ package org.resideadmissions
 class PipelineHelper implements Serializable{
     def steps
     def aws
+    
 
     PipelineHelper(steps) {
         this.steps = steps
@@ -39,8 +40,9 @@ class PipelineHelper implements Serializable{
                 // def dropdownlist = []
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
-                
-                return this.aws.ecrGetLogin(region)
+                def docker_password = this.aws.ecrGetLogin(region)
+                def aws_erc_account = this.getAwsAccount('master') 
+                this.steps.sh(script: "echo ${docker_password} | docker login --username AWS --password-stdin ${aws_erc_account}", returnStdout:true)
 
         } catch (error){
             this.steps.echo error.getMessage()
@@ -71,19 +73,19 @@ class PipelineHelper implements Serializable{
     //     }
     // }
 
-    // def getAwsAccount(env) {
-    //     switch(env) {
-    //         case 'dev':
-    //         return "380505780076.dkr.ecr.us-east-2.amazonaws.com"
+    def getAwsAccount(env) {
+        switch(env) {
+            case 'dev':
+            return "380505780076.dkr.ecr.us-east-2.amazonaws.com"
 
-    //         case 'test':
-    //         return "462285824561.dkr.ecr.us-east-2.amazonaws.com"
+            case 'test':
+            return "462285824561.dkr.ecr.us-east-2.amazonaws.com"
 
-    //         case 'stg':
-    //         return "578511621719.dkr.ecr.us-east-2.amazonaws.com"
+            case 'stg':
+            return "578511621719.dkr.ecr.us-east-2.amazonaws.com"
 
-    //         default:
-    //         return "402516319689.dkr.ecr.us-east-2.amazonaws.com"
-    //     }
-    // }
+            default:
+            return "402516319689.dkr.ecr.us-east-2.amazonaws.com"
+        }
+    }
 }
