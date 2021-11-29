@@ -1,8 +1,7 @@
 def call() {
     properties([
         parameters([
-            booleanParam(defaultValue: false, name: 'BuildAll', description: ''),
-            [$class: 'ChoiceParameter', choiceType: 'PT_CHECKBOX',
+            [$class: 'ChoiceParameter', choiceType: 'PT_SINGLESELECT',
                 description: 'Choose environment category.',
                 name: 'ENVIRONMENT',
                 script: [
