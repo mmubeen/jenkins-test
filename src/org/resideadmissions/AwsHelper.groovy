@@ -80,9 +80,11 @@ class AwsHelper implements Serializable{
     Returns: repositoryUri
     */
     def ecr_list_images(String repositoryName, String region){
+        def operation = "list-images"
         try{
-            def command = "aws ecr list-images --repository-name ${repositoryName}"
-            this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name ${repositoryName} --region ${region} 2>&1 | tee result.json")
+            
+            def command = "aws ecr ${operation} --repository-name ${repositoryName} --region ${region}"
+            this.steps.sh(returnStdout: true, script: "${command} 2>&1 | tee result.json")
             def output = readFile('result.json').trim()
             echo "tagsList: ${tagsList}"
             def parseJson = jsonParse(output)
