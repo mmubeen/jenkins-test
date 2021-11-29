@@ -44,7 +44,7 @@ class PipelineHelper implements Serializable{
                 def aws_erc_account = this.getAwsAccount('dev') 
                 this.steps.sh(script: "echo ${docker_password} | docker login --username AWS --password-stdin ${aws_erc_account}", returnStdout:true)
                 def images = this.aws.ecr_list_images("reside-integrations",region)
-                println images
+
         } catch (error){
             this.steps.echo error.getMessage()
             throw error
