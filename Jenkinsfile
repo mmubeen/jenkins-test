@@ -1,11 +1,11 @@
 @Library('reside-pipeline-shared@main')
 import org.resideadmissions.Choices
 
-def choices = new Choices(this)
-choices.renderVersionChoices()
-
 pipeline {
     agent any
+    parameters {
+       choice(choices: new Choices(this).getVersions(), description:  'Pick a version', name: 'VERSION')
+    }
     stages {
         stage('test') {
             steps {
