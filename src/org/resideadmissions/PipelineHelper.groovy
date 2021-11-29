@@ -25,7 +25,7 @@ class PipelineHelper implements Serializable{
 
     PipelineHelper(steps) {
         this.steps = steps
-        this.aws = new AwsHelper(this.steps = steps)
+        this.aws = new AwsHelper(this.steps)
     }
 
     def getImageTags(awsCredentialsId, region){
