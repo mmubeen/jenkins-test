@@ -25,7 +25,7 @@ class PipelineHelper implements Serializable{
 
     PipelineHelper(steps) {
         this.steps = steps
-        this.aws = new AwsHelper(this.steps)
+        this.aws = new AwsHelper(this.steps, )
     }
 
     def getImageTags(awsCredentialsId, region){
@@ -40,7 +40,7 @@ class PipelineHelper implements Serializable{
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
                 
-                ecrLogin = this.aws.ecrGetLogin()
+                ecrLogin = this.aws.ecrGetLogin(region)
                 return ecrLogin
 
         } catch (error){

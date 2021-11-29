@@ -6,9 +6,8 @@ import groovy.json.JsonSlurperClassic
 class AwsHelper implements Serializable{
     def steps
     def region
-    AwsHelper(steps, region){
+    AwsHelper(steps){
         this.steps = steps
-        this.region = region
         println "AwsHelper class created"
     }
 
@@ -88,8 +87,8 @@ class AwsHelper implements Serializable{
         return ecrRepositoryUri
     }
 
-    def ecrGetLogin(){
-        return this.steps.sh(script: "aws ecr get-login-password -region ${this.region}", returnStdout:true).trim()
+    def ecrGetLogin(region){
+        return this.steps.sh(script: "aws ecr get-login-password -region ${region}", returnStdout:true).trim()
     }
 
     /**
