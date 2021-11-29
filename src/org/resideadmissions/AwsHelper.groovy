@@ -33,6 +33,7 @@ class AwsHelper implements Serializable{
         def file_name = "script_output_${random_num}.txt"
         def status = this.steps.sh(returnStatus: true, script: "$script &> $file_name")
         def output = readFile(file_name).trim()
+        this.steps.sh "echo 'output is $output'"
         this.steps.sh "[ -e $file_name ] && rm $file_name"
 
         return [status, output]
