@@ -21,7 +21,7 @@ class Choices implements Serializable {
                     name: 'VERSION',
                     script: [
                         $class: 'GroovyScript',
-                        script: [sandbox: true, script: '''
+                        script: [sandbox: false, script: '''
                             return this.getVersions()
                         '''
                         ]
