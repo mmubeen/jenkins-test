@@ -2,7 +2,7 @@ package org.resideadmissions
 
 class Choices implements Serializable {
     def steps 
-    
+
     Choices(steps){
         this.steps = steps
     }
@@ -15,20 +15,20 @@ class Choices implements Serializable {
     }
 
     def renderVersionChoices(){
-        properties([
-            parameters([
-                [$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT',
-                    description: 'Choose environment category.',
-                    name: 'VERSION',
-                    script: [
-                        $class: 'GroovyScript',
-                        script: [sandbox: false, script: '''
-                            return this.getVersions()
-                        '''
+        return this.steps.properties([
+                parameters([
+                    [$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT',
+                        description: 'Choose environment category.',
+                        name: 'VERSION',
+                        script: [
+                            $class: 'GroovyScript',
+                            script: [sandbox: false, script: '''
+                                return this.getVersions()
+                            '''
+                            ]
                         ]
                     ]
-                ]
+                ])
             ])
-        ])
     }
 }
