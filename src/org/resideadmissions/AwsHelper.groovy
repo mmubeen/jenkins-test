@@ -74,6 +74,28 @@ class AwsHelper implements Serializable{
     }
 
     /**
+    Execute AWS ECR commands.
+    Basically calls aws-cli like: aws ecr 'operation' ...
+    Example: aws ecr create-repository --repository-name dataops/bi-jobs-worker
+    Returns: repositoryUri
+    */
+    def ecr_list_images(String repositoryName, String region){
+        try{
+            def command = "aws ecr list-images --repository-name ${repositoryName}"
+            this.steps.sh(returnStdout: true, script: "aws ecr list-images --repository-name ${repositoryName} --region ${region} 2>&1 | tee result.json")
+            def output = readFile('result.json').trim()
+            echo "tagsList: ${tagsList}"
+            def parseJson = jsonParse(output)
+            def dropdownlist = []
+            parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
+            return dropdownlist
+        } catch (Exception ex) {
+            println("Unable to call ECR ${operation} got Exception: ${ex}")
+            return null
+        }
+    }
+
+    /**
     Tries to create ECR repo, if fails will try to find it.
     Returns: repositoryUri
     */
