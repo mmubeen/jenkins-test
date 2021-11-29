@@ -87,7 +87,7 @@ class AwsHelper implements Serializable{
     }
 
     def ecrGetLogin(){
-        return this.steps.sh(script: "aws ecr get-login --no-include-email", returnStdout:true).trim()
+        return this.steps.sh(script: "aws ecr get-login-password --no-include-email", returnStdout:true).trim()
     }
 
     /**
