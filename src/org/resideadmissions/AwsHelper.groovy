@@ -86,8 +86,8 @@ class AwsHelper implements Serializable{
             def command = "aws ecr ${operation} --repository-name ${repositoryName} --region ${region}"
             this.steps.println("command is ${command}")
             this.steps.sh(returnStdout: false, script: "${command}")
-            this.steps.sh(returnStdout: true, script: "${command} 2>&1 | tee result.json")
-            def output = new File('result.json').getText('UTF-8').trim()
+            this.steps.sh(returnStdout: true, script: "${command}")
+            def output = this.steps.sh(returnStdout: true, script: "${command}").trim()
             this.steps.println("tagsList: ${output}")
 
             def parseJson = jsonParse(output)
