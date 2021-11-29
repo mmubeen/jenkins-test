@@ -93,6 +93,7 @@ class AwsHelper implements Serializable{
             def parseJson = jsonParse(output)
             def dropdownlist = []
             parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
+            this.steps.println("dropdownlist: ${dropdownlist}")
             return dropdownlist
         } catch (Exception ex) {
             println("Unable to call ECR ${operation} got Exception: ${ex}")
