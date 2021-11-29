@@ -3,6 +3,7 @@ import org.resideadmissions.Choices
 
 def VersionChoices() {
    def choices = new Choices()
+   println(choices.getVersions())
    return choices.getVersions()
 }
 

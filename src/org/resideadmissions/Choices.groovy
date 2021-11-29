@@ -1,6 +1,6 @@
 package org.resideadmissions
 
-class Choices implements Serializable {
+class Choices implements Serializable{
     def steps 
 
     Choices(steps){
