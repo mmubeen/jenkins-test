@@ -2,7 +2,7 @@
 import org.resideadmissions.Choices
 
 def VersionChoices() {
-   return ['1','2','3'].join('\n')
+   return new Chioices(this).getVersions()
 }
 
 
