@@ -30,7 +30,7 @@ class AwsHelper implements Serializable{
         def random_num = rand.nextInt(100000)
 
         def file_name = "script_output_${random_num}.txt"
-        def status = sh(returnStatus: true, script: "$script &> $file_name")
+        def status = this.steps.sh(returnStatus: true, script: "$script &> $file_name")
         def output = readFile(file_name).trim()
         this.steps.sh "[ -e $file_name ] && rm $file_name"
 
@@ -87,7 +87,7 @@ class AwsHelper implements Serializable{
     }
 
     def ecrGetLogin(){
-        return sh(script: "aws ecr get-login --no-include-email", returnStdout:true).trim()
+        return this.steps.sh(script: "aws ecr get-login --no-include-email", returnStdout:true).trim()
     }
 
     /**
@@ -118,7 +118,7 @@ class AwsHelper implements Serializable{
     Returns: status code
     */
     def logs(String operation, String logGroupName){
-        def status = sh(script:"aws logs ${operation} --log-group-name ${logGroupName}", returnStatus:true)
+        def status = this.steps.sh(script:"aws logs ${operation} --log-group-name ${logGroupName}", returnStatus:true)
         println("awsLogs status code is: ${status}")
         return status
     }
@@ -213,7 +213,7 @@ class AwsHelper implements Serializable{
     */
     def cloudFormationPackage(String s3Bucket, String s3Prefix, String templateFile, String outputTemplateFile ){
         def command = "aws cloudformation package --s3-bucket ${s3Bucket} --s3-prefix ${s3Prefix} --template-file ${templateFile} --output-template-file ${outputTemplateFile.trim()}"
-        def status = sh(script: command, returnStatus:true)
+        def status = this.steps.sh(script: command, returnStatus:true)
         return status
     }
 
@@ -272,7 +272,7 @@ class AwsHelper implements Serializable{
     */
     def cloudFormationWaitStackCreateComplete(String stackName){
         def waitCommand = "aws cloudformation wait stack-create-complete --stack-name ${stackName}"
-        def status = sh(waitCommand)
+        def status = this.steps.sh(waitCommand)
         println("cloudformation wait stack-create-complete status code is: ${status}")
 
         return status
@@ -287,7 +287,7 @@ class AwsHelper implements Serializable{
     */
     def cloudFormationWaitStackUpdateComplete(String stackName){
         def waitCommand = "aws cloudformation wait stack-update-complete --stack-name ${stackName}"
-        def status = sh(waitCommand)
+        def status = this.steps.sh(waitCommand)
         println("cloudformation wait stack-update-complete status code is: ${status}")
 
         return status
@@ -302,7 +302,7 @@ class AwsHelper implements Serializable{
     boolean cloudFormationStackExist(String stackName){
         try{
             def waitCommand = "aws cloudformation describe-stacks --stack-name ${stackName}"
-            def status = sh(waitCommand)
+            def status = this.steps.sh(waitCommand)
             println("cloudformation wait describe-stacks status code is: ${status}")
 
             return status != 255 ? true : false
@@ -320,7 +320,7 @@ class AwsHelper implements Serializable{
     */
     boolean cloudFormationeDeleteStack(String stackName){
         def command = "aws cloudformation delete-stack --stack-name ${stackName}"
-        def status = sh(script: command, returnStatus:true)
+        def status = this.steps.sh(script: command, returnStatus:true)
         println("cloudformation delete-stack status code is: ${status}")
 
         return status
@@ -352,7 +352,7 @@ class AwsHelper implements Serializable{
     */
     def cloudFormationWaitStackDeleteComplete(String stackName){
         def waitCommand = "aws cloudformation wait stack-delete-complete --stack-name ${stackName}"
-        def status = sh(waitCommand)
+        def status = this.steps.sh(waitCommand)
         println("cloudformation wait stack-delete-complete status code is: ${status}")
 
         return status
@@ -401,7 +401,7 @@ class AwsHelper implements Serializable{
         if (force){
             command += " --force"
         }
-        def status = sh(script: command, returnStatus:true)
+        def status = this.steps.sh(script: command, returnStatus:true)
         println("ECR delete repository status code is: ${status}")
 
         return status
@@ -427,7 +427,7 @@ class AwsHelper implements Serializable{
         if (overwrite){
             command += " --overwrite"
         }
-        def status = sh(script: command, returnStatus:true)
+        def status = this.steps.sh(script: command, returnStatus:true)
         println("SSM put parameter status code is: ${status}")
 
         return status
