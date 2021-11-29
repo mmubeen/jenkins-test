@@ -4,7 +4,7 @@ import org.resideadmissions.Choices
 pipeline {
     agent any
     parameters {
-       choice(choices: new Choices(this).getVersions(), description:  'Pick a version', name: 'VERSION')
+       choice(choices: {return new Choices(this).getVersions()}, description:  'Pick a version', name: 'VERSION')
     }
     stages {
         stage('test') {
