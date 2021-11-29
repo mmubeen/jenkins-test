@@ -12,4 +12,22 @@ class Choices implements Serializable {
             return pipeine_helper.getImageTags("us-east-2")
         }
     }
+
+    def renderVersionChoices(){
+        properties([
+            parameters([
+                [$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT',
+                    description: 'Choose environment category.',
+                    name: 'VERSION',
+                    script: [
+                        $class: 'GroovyScript',
+                        script: [sandbox: true, script: '''
+                            return this.getVersions()
+                        '''
+                        ]
+                    ]
+                ]
+            ])
+        ])
+    }
 }

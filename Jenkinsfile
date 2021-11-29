@@ -1,7 +1,11 @@
 @Library('reside-pipeline-shared@main')
 import org.resideadmissions.PipelineHelper
 
-deriveJobParams()
+@Library('reside-pipeline-shared@main')
+import org.resideadmissions.Choices
+
+def choices = new Choices()
+choices.renderVersionChoices()
 
 node {    
     withAWS(credentials:"aws-reside-dev-credentials",region:"us-east-2"){
