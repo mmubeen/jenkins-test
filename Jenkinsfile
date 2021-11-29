@@ -7,7 +7,7 @@ node {
     //     cat ~/my_password.txt | docker login --username foo --password-stdin
     // '''
     
-    withAWS(credentials:"aws-master-credential",region:"us-east-2"){
+    withAWS(credentials:"aws-reside-dev-credentials",region:"us-east-2"){
         pipeine_helper = new PipelineHelper(this)
         echo pipeine_helper.getImageTags("us-east-2")
     }
