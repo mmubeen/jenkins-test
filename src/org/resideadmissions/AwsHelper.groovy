@@ -92,7 +92,7 @@ class AwsHelper implements Serializable{
 
             def parseJson = jsonParse(output)
             def dropdownlist = []
-            parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
+            parseJson.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
             this.steps.println("dropdownlist: ${dropdownlist}")
             return dropdownlist
         } catch (Exception ex) {
