@@ -4,8 +4,9 @@ import com.cloudbees.groovy.cps.NonCPS
 import groovy.json.JsonSlurperClassic
 
 class AwsHelper implements Serializable{
-
-    AwsHelper(){
+    def steps
+    AwsHelper(steps){
+        this.steps = steps
         println "AwsHelper class created"
     }
 
@@ -31,7 +32,7 @@ class AwsHelper implements Serializable{
         def file_name = "script_output_${random_num}.txt"
         def status = sh(returnStatus: true, script: "$script &> $file_name")
         def output = readFile(file_name).trim()
-        sh "[ -e $file_name ] && rm $file_name"
+        this.steps.sh "[ -e $file_name ] && rm $file_name"
 
         return [status, output]
     }
@@ -177,7 +178,7 @@ class AwsHelper implements Serializable{
     * @returns nothing
     */
     def cognitoAdminSetUserPassword(String userPoolId, String userName, String password){
-        sh(script: "aws cognito-idp admin-set-user-password --user-pool-id ${userPoolId} --username ${userName} --password ${password} --permanent", returnStdout: true).trim()
+        this.steps.sh(script: "aws cognito-idp admin-set-user-password --user-pool-id ${userPoolId} --username ${userName} --password ${password} --permanent", returnStdout: true).trim()
     }
 
 

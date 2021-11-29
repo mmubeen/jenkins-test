@@ -21,11 +21,11 @@ package org.resideadmissions
 
 class PipelineHelper implements Serializable{
     def steps
-    def aws = new AwsHelper()
+    def aws
 
     PipelineHelper(steps) {
         this.steps = steps
-        this.aws = new AwsHelper()
+        this.aws = new AwsHelper(this.steps = steps)
     }
 
     def getImageTags(awsCredentialsId, region){
