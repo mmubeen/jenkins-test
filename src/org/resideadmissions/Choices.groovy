@@ -9,7 +9,7 @@ class Choices implements Serializable{
 
     def getVersions(){
         this.steps.withAWS(credentials:"aws-reside-dev-credentials",region:"us-east-2"){
-            pipeine_helper = new PipelineHelper(this.steps)
+            def pipeine_helper = new PipelineHelper(this.steps)
             return pipeine_helper.getImageTags("us-east-2")
         }
         // return ['1','2','3'].join('\n')
