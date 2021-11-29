@@ -1,7 +1,7 @@
 def call() {
     properties([
         parameters([
-            [$class: 'ChoiceParameter', choiceType: 'PT_SINGLESELECT',
+            [$class: 'ChoiceParameter', choiceType: 'PT_SINGLE_SELECT',
                 description: 'Choose environment category.',
                 name: 'ENVIRONMENT',
                 script: [
