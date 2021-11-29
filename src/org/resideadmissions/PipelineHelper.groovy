@@ -28,7 +28,7 @@ class PipelineHelper implements Serializable{
         this.aws = new AwsHelper(this.steps, )
     }
 
-    def getImageTags(awsCredentialsId, region){
+    def getImageTags(region){
         try {
 
                 // this.steps.sh(returnStdout: false, script: "aws ecr get-login --region ${region} --no-include-email")
