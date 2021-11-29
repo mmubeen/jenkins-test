@@ -46,7 +46,7 @@ class AwsHelper implements Serializable{
     */
     def executeShToObject(String command){
         def (status, output) = runShCommand(command)
-
+        println output
         if (status != 0){
             throw new Exception(output)
         }else {
