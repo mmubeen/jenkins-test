@@ -1,7 +1,8 @@
 package org.resideadmissions
 
 class Choices implements Serializable {
-
+    def steps 
+    
     Choices(steps){
         this.steps = steps
     }
