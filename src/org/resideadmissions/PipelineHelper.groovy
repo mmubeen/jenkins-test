@@ -40,7 +40,7 @@ class PipelineHelper implements Serializable{
                 // parsedJSON.imageIds.each { dropdownlist.push('"' + it.imageTag + '"') }
                 // return dropdownlist
                 
-                return his.aws.ecrGetLogin(region)
+                return this.aws.ecrGetLogin(region)
 
         } catch (error){
             this.steps.echo error.getMessage()
