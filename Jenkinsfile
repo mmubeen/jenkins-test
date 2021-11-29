@@ -2,7 +2,7 @@
 import org.resideadmissions.Choices
 
 def VersionChoices() {
-   return new Chioices(this).getVersions()
+   return new Choices(this).getVersions()
 }
 
 
