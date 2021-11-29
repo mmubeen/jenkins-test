@@ -2,7 +2,10 @@
 import org.resideadmissions.Choices
 
 def VersionChoices() {
-   return new Choices(this).getVersions()
+    stage('get versions'){
+        return new Choices(this).getVersions()
+    }
+   
 }
 
 
