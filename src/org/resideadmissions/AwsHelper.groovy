@@ -84,11 +84,11 @@ class AwsHelper implements Serializable{
         try{
             
             def command = "aws ecr ${operation} --repository-name ${repositoryName} --region ${region}"
-            println("${command}")
+            this.steps.println("command is ${command}")
             this.steps.sh(returnStdout: true, script: "${command}")
             this.steps.sh(returnStdout: true, script: "${command} 2>&1 | tee result.json")
             def output = new File('result.json').getText('UTF-8').trim()
-            println("tagsList: ${output}")
+            this.steps.println("tagsList: ${output}")
 
             def parseJson = jsonParse(output)
             def dropdownlist = []
