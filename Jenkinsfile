@@ -2,7 +2,7 @@
 import org.resideadmissions.PipelineHelper
 import org.resideadmissions.Choices
 
-def choices = new Choices()
+def choices = new Choices(this)
 choices.renderVersionChoices()
 
 node {    
