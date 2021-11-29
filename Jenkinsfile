@@ -1,7 +1,5 @@
 @Library('reside-pipeline-shared@main')
 import org.resideadmissions.PipelineHelper
-
-@Library('reside-pipeline-shared@main')
 import org.resideadmissions.Choices
 
 def choices = new Choices()
