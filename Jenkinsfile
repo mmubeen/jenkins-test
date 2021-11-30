@@ -1,18 +1,13 @@
 @Library('reside-pipeline-shared@main')
 import org.resideadmissions.Choices
 
-def VersionChoices() {
-    stage('get versions'){
-        return new Choices(this).getVersions()
-    }
-   
-}
+def VersionChoices = new Choices(this).getVersions()
+
 
 
 properties([
-
     parameters([
-        choice(name: 'PARAM', choices: VersionChoices(), description: 'Choice'),
+        choice(name: 'PARAM', choices: VersionChoices, description: 'Choice'),
     ])
 ])
 
